@@ -9,7 +9,7 @@ from lightbulb import plugins
 from hikari_testing.bot import Bot
 
 
-class ErrorHandler(lightbulb.Plugin):
+class Error(lightbulb.Plugin):
     @plugins.listener()
     async def on_command_error(self, event: lightbulb.CommandErrorEvent) -> None:
         if isinstance(event.exception, lightbulb.errors.CommandNotFound):
@@ -33,8 +33,8 @@ class ErrorHandler(lightbulb.Plugin):
 
 
 def load(bot: Bot) -> None:
-    bot.add_plugin(ErrorHandler())
+    bot.add_plugin(Error())
 
 
 def unload(bot: Bot) -> None:
-    bot.remove_plugin("ErrorHandler")
+    bot.remove_plugin("Error")
