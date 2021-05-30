@@ -1,7 +1,7 @@
 import os
 
-from testbot import __version__
-from testbot.bot import Bot
+from hikari_testing import __version__
+from hikari_testing.bot import Bot
 
 if os.name != "nt":
     import uvloop

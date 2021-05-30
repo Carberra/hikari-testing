@@ -1,6 +1,6 @@
 import lightbulb
 
-from testbot.bot import Bot
+from hikari_testing.bot import Bot
 
 
 class Meta(lightbulb.Plugin):

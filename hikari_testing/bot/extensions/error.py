@@ -6,7 +6,7 @@ import hikari
 import lightbulb
 from lightbulb import plugins
 
-from testbot.bot import Bot
+from hikari_testing.bot import Bot
 
 
 class ErrorHandler(lightbulb.Plugin):

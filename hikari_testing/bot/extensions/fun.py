@@ -2,7 +2,7 @@ import random
 
 import lightbulb
 
-from testbot.bot import Bot
+from hikari_testing.bot import Bot
 
 
 class Fun(lightbulb.Plugin):

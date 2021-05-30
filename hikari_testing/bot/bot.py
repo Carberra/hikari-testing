@@ -8,12 +8,12 @@ import lightbulb
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from pytz import utc
 
-from testbot import __version__
+from hikari_testing import __version__
 
 
 class Bot(lightbulb.Bot):
     def __init__(self) -> None:
-        self._extensions = [p.stem for p in Path("./testbot/bot/extensions/").glob("*.py")]
+        self._extensions = [p.stem for p in Path("./hikari_testing/bot/extensions/").glob("*.py")]
         self.scheduler = AsyncIOScheduler()
         self.scheduler.configure(timezone=utc)
 
@@ -45,7 +45,7 @@ class Bot(lightbulb.Bot):
 
     async def on_starting(self, event: hikari.StartingEvent) -> None:
         for ext in self._extensions:
-            self.load_extension(f"testbot.bot.extensions.{ext}")
+            self.load_extension(f"hikari_testing.bot.extensions.{ext}")
             logging.info(f"{ext} extension loaded")
 
     async def on_started(self, event: hikari.StartedEvent) -> None:
