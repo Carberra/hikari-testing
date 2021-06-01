@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import lightbulb
 from lightbulb import errors, plugins
 
