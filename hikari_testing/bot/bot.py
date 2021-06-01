@@ -8,7 +8,7 @@ import lightbulb
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from pytz import utc
 
-from hikari_testing import __version__
+from hikari_testing import STDOUT_CHANNEL_ID, __version__
 
 
 class Bot(lightbulb.Bot):
@@ -39,19 +39,25 @@ class Bot(lightbulb.Bot):
         super().run(
             activity=hikari.Activity(
                 name=f"-help | Version {__version__}",
-                type=hikari.ActivityType.WATCHING
+                type=hikari.ActivityType.WATCHING,
             )
         )
 
     async def on_starting(self, event: hikari.StartingEvent) -> None:
         for ext in self._extensions:
             self.load_extension(f"hikari_testing.bot.extensions.{ext}")
-            logging.info(f"{ext} extension loaded")
+            logging.info(f"'{ext}' extension loaded")
 
     async def on_started(self, event: hikari.StartedEvent) -> None:
         self.scheduler.start()
         self.add_check(self.guild_only)
+
+        self.stdout_channel = await self.rest.fetch_channel(STDOUT_CHANNEL_ID)
+        await self.stdout_channel.send(f"Testing v{__version__} now online!")
+
         logging.info("BOT READY!")
 
     async def on_stopping(self, event: hikari.StoppingEvent) -> None:
+        # This is gonna be fixed.
+        await self.stdout_channel.send(f"Testing v{__version__} is shutting down.")
         self.scheduler.shutdown()

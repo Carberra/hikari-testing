@@ -19,7 +19,11 @@ class Fun(lightbulb.Plugin):
             return await ctx.respond("I can only roll up to 25 dice at one time.")
 
         rolls = [random.randint(1, highest) for i in range(number)]
-        await ctx.respond(" + ".join(str(r) for r in rolls) + f" = {sum(rolls):,}", reply=True, mentions_reply=True)
+        await ctx.respond(
+            " + ".join(str(r) for r in rolls) + f" = {sum(rolls):,}",
+            reply=True,
+            mentions_reply=True,
+        )
 
 
 def load(bot: Bot) -> None:
