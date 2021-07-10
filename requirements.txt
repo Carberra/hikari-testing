@@ -1,5 +1,4 @@
 git+https://github.com/hikari-py/hikari#egg=hikari[speedups]
 apscheduler>=3.7.0
-hikari-lightbulb>=0.0.60
-hikari-tanjun>=1.0.0
+hikari-lightbulb>=0.0.61
 uvloop>=0.15.2
