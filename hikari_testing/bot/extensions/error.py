@@ -10,6 +10,11 @@ class Error(lightbulb.Plugin):
         if isinstance(event.exception, errors.CommandNotFound):
             return
 
+        if isinstance(event.exception, errors.ConverterFailure):
+            return await event.context.respond(
+                event.exception.text
+            )
+
         if isinstance(event.exception, errors.NotEnoughArguments):
             return await event.context.respond(
                 "There are some missing arguments: " + ", ".join(event.exception.missing_args)

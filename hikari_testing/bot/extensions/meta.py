@@ -15,6 +15,8 @@ class Meta(lightbulb.Plugin):
     async def command_userinfo(self, ctx: lightbulb.Context, target: lightbulb.member_converter = None) -> None:
         target = target or ctx.member
 
+        p = getattr(target.presence, "formatted", "No presence.") or "No presence."
+
         embed = (
             hikari.Embed(
                 title="User information",
@@ -28,7 +30,23 @@ class Meta(lightbulb.Plugin):
                 icon=ctx.member.avatar_url,
             )
             .set_thumbnail(target.avatar_url)
-            .add_field(name="Test", value="Test", inline=True)
+            .add_field(name="ID", value=target.id)
+            .add_field(name="Discriminator", value=target.discriminator, inline=True)
+            .add_field(name="Bot?", value=target.is_bot, inline=True)
+            .add_field(name="No. of roles", value=len(target.roles) - 1, inline=True)
+            .add_field(name="Created on", value=target.created_at.strftime("%d %b %Y"), inline=True)
+            .add_field(name="Joined on", value=target.joined_at.strftime("%d %b %Y"), inline=True)
+            .add_field(
+                name="Boosted since",
+                value=getattr(target.premium_since, "strftime", lambda x: "Not boosting.")("%d %b %Y"),
+                inline=True
+            )
+            # .add_field(name="Presence", value=f"{target.presence}")  # Submit PR
+            .add_field(
+                name="Presence",
+                value=p,
+            )
+            .add_field(name="Roles", value=" | ".join(r.mention for r in reversed(target.roles[1:])))
         )
 
         await ctx.respond(embed)
