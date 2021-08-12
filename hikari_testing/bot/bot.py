@@ -3,6 +3,7 @@ from pathlib import Path
 
 import hikari
 import lightbulb
+import sake
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from pytz import utc
 
@@ -42,6 +43,8 @@ class Bot(lightbulb.Bot):
         )
 
     async def on_starting(self, event: hikari.StartingEvent) -> None:
+        cache = sake.redis.RedisCache(self, self, address="redis://127.0.0.1")
+        await cache.open()
         for ext in self._extensions:
             self.load_extension(f"hikari_testing.bot.extensions.{ext}")
             logging.info(f"'{ext}' extension loaded")
