@@ -1,5 +1,4 @@
-git+https://github.com/hikari-py/hikari#egg=hikari[speedups]
-git+https://github.com/tandemdude/hikari-lightbulb
-git+https://github.com/FasterSpeeding/Sake.git@task/raw-dispatch
-apscheduler>=3.7.0
+git+https://github.com/FasterSpeeding/hikari@task/components#egg=hikari[speedups]
+git+https://github.com/FasterSpeeding/Tanjun@task/components
+git+https://github.com/FasterSpeeding/Sake@task/raw-dispatch
 uvloop>=0.15.2
