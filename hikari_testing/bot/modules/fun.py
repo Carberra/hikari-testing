@@ -16,19 +16,11 @@ async def command_hello(ctx: tanjun.abc.Context) -> None:
 
 
 @component.with_slash_command
-@tanjun.with_int_slash_option(
-    "number", "The number of dice to roll (max: 25)."
-)
-@tanjun.with_int_slash_option(
-    "sides", "The number of sides each die will have.", default=6
-)
-@tanjun.with_int_slash_option(
-    "bonus", "A fixed number to add to the total roll.", default=0
-)
+@tanjun.with_int_slash_option("number", "The number of dice to roll (max: 25).")
+@tanjun.with_int_slash_option("sides", "The number of sides each die will have.", default=6)
+@tanjun.with_int_slash_option("bonus", "A fixed number to add to the total roll.", default=0)
 @tanjun.as_slash_command("dice", "Roll one or more dice.")
-async def command_dice0(
-    ctx: tanjun.abc.Context, number: int, sides: int, bonus: int
-) -> None:
+async def command_dice(ctx: tanjun.abc.Context, number: int, sides: int, bonus: int) -> None:
     if number > 25:
         await ctx.respond("No more than 25 dice can be rolled at once.")
         return

@@ -23,9 +23,7 @@ LINKS = (
 
 
 @component.with_slash_command
-@tanjun.with_str_slash_option(
-    "name", "The link to show.", choices=(l.lower() for l in LINKS)
-)
+@tanjun.with_str_slash_option("name", "The link to show.", choices=(l.lower() for l in LINKS))
 @tanjun.as_slash_command("link", "Show a specific Carberra link.")
 async def command_link(ctx: tanjun.abc.Context, name: str) -> None:
     await ctx.respond(f"<https://{name}.carberra.xyz>")

@@ -25,9 +25,7 @@ class Bot(hikari.GatewayBot):
         )
 
     def create_client(self: _BotT) -> None:
-        self.client = Client.from_gateway_bot(
-            self, set_global_commands=TEST_GUILD_ID
-        )
+        self.client = Client.from_gateway_bot(self, set_global_commands=TEST_GUILD_ID)
         self.client.load_modules()
 
     def run(self: _BotT) -> None:
@@ -59,7 +57,5 @@ class Bot(hikari.GatewayBot):
 
     async def on_stopping(self: _BotT, event: hikari.StoppingEvent) -> None:
         # This is gonna be fixed.
-        await self.stdout_channel.send(
-            f"Testing v{__version__} is shutting down."
-        )
+        await self.stdout_channel.send(f"Testing v{__version__} is shutting down.")
         self.client.scheduler.shutdown()
