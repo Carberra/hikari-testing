@@ -23,6 +23,5 @@ class Client(tanjun.Client):
                 for m in Path(__file__).parent.glob("modules/*.py")
             ]
         )
-
-    # Doesn't work, raised in #55
-    # return super().load_modules(*Path(__file__).parent.glob("modules/*.py"))
+        # Fixed in #55, need to wait until @task/components is merged.
+        # return super().load_modules(*Path(__file__).parent.glob("modules/*.py"))

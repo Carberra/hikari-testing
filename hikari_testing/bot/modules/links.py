@@ -1,8 +1,9 @@
+import asyncio
 import random
 
 import hikari
-from hikari.interactions.base_interactions import ResponseType
 import tanjun
+from hikari.interactions.base_interactions import ResponseType
 
 from hikari_testing.bot.client import Client
 
@@ -46,16 +47,17 @@ async def command_links(ctx: tanjun.abc.Context) -> None:
         component=select_menu.add_to_container(),
     )
 
-
-@component.with_listener(hikari.InteractionCreateEvent)
-async def listen_links(event: hikari.InteractionCreateEvent):
-    if not isinstance(event.interaction, hikari.ComponentInteraction):
-        return
-
-    await event.interaction.create_initial_response(
-        ResponseType.MESSAGE_UPDATE,
-        f"<https://{event.interaction.values[0].lower()}.carberra.xyz>",
-    )
+    try:
+        event = await ctx.client.events.wait_for(hikari.InteractionCreateEvent, timeout=60)
+    except asyncio.TimeoutError:
+        # select_menu = select_menu.set_is_disabled(True)
+        await ctx.edit_initial_response("Timed out.", components=[])
+        # await ctx.delete_initial_response()
+    else:
+        await ctx.edit_initial_response(
+            f"<https://{event.interaction.values[0].lower()}.carberra.xyz>",
+            components=[],
+        )
 
 
 @tanjun.as_loader
