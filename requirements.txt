@@ -1,4 +1,4 @@
-git+https://github.com/FasterSpeeding/hikari@task/components#egg=hikari[speedups]
+hikari[speedups]==2.0.0.dev101
 git+https://github.com/FasterSpeeding/Tanjun@task/components
 git+https://github.com/FasterSpeeding/Sake@task/raw-dispatch
 uvloop>=0.15.2
